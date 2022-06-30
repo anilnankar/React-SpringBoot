@@ -1,6 +1,6 @@
 import React from "react";
 import './ImageUpload.css';
-import FileHandler from '../Utils/FileHandler';
+import FileHandler from '../../Utils/FileHandler';
 
 function ImageUpload() {
 
