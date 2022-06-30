@@ -1,0 +1,27 @@
+.file-uploader .dragFile{
+    margin: 50px auto 10px auto;
+    padding: 32px;
+    background: rgb(245, 249, 252);
+    width: 553px;
+    height: 177px;
+    border: 2px dashed rgb(199, 205, 211);
+    cursor: pointer;
+    border-radius: 8px;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center; 
+}
+
+.file-uploader .selectFile{
+    margin: 10px auto;
+    padding: 15px 32px 15px 32px;
+    background: rgb(245, 249, 252);
+    width: 490px;
+    height: 20px;
+    border: 2px dotted rgb(199, 205, 211);
+    cursor: pointer;
+    border-radius: 8px;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center; 
+}
