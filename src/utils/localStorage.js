@@ -3,7 +3,6 @@ const percent = 100000;
 
 const setLocalData = state => {
   try {
-    console.log("setLocalData--------------");
     localStorage.setItem('reactImageState', JSON.stringify(state));
   } catch (error) {
     return error;
@@ -26,7 +25,7 @@ const getLocalData = () => {
     ...data,
     newPoint: null,
     selectedPoint: null,
-    showAllComments: false,
+    showAllComments: true,
     showPoints: true
   };
 };

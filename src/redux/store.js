@@ -2,7 +2,9 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 // import createHistory from 'history/createBrowserHistory';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
-import reducers from './reducers/image';
+// import reducers from './reducers/image';
+import reducers from '../redux/reducers';
+
 // import { composeWithDevTools } from "redux-devtools-extension";
 
 // const history = createHistory();
