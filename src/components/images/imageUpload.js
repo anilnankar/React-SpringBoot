@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import ImagePicker from '../../utils/imagePicker';
 import actions from '../../redux/actions';
 import './imageUpload.css';
+// import { Redirect } from 'react-router-dom';
 
 const { addImage, setSelectedPoint } = actions;
 class ImageUpload extends Component {
@@ -21,6 +22,7 @@ class ImageUpload extends Component {
     };
 
     reader.readAsDataURL(file);
+    // <Redirect to={'/imageList'} />
   };
   render() {
     return (
