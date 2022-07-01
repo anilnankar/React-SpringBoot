@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './imageList.css';
 import SingleImage from './singleImage';
-import styles from '../../styles';
 import actions from '../../redux/actions';
-const style = styles.Gallary;
+import './imageList.css';
+
 const { addImage, changSelectedeImage, setSelectedPoint } = actions;
-
-
 class ImageList extends Component {
   
   render() {
     const { images, changSelectedeImage, setSelectedPoint } = this.props;
     return (
       <div
-      // style={style.main}
       onClick={() => {
         setSelectedPoint(null);
       }}

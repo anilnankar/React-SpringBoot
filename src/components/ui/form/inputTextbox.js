@@ -15,7 +15,7 @@ export default class InputTextbox extends Component {
           this.setState({ value: '' });
         }
       } else {
-        alert('Please type something');
+        alert('Please type comment');
       }
     }
   };

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import BlankCenterDiv from '../comment/blankCenterDiv';
 import ImagePreview from '../comment/imagePreview';
 import actions from '../../redux/actions';
-import styles from '../../styles';
 
 const {
   setDimensions,
@@ -13,7 +12,6 @@ const {
   setSelectedPoint,
   toggleOptions
 } = actions;
-const style = styles.SelectedImage;
 
 class ImagePoint extends Component {
   render() {
@@ -25,13 +23,9 @@ class ImagePoint extends Component {
       selectedPoint,
       newPoint,
       showPoints,
-      showAllComments,
       setDimensions,
-      editImage,
-      deleteImage,
       setNewPoint,
-      setSelectedPoint,
-      toggleOptions
+      setSelectedPoint
     } = this.props;
     if (notSelected) {
       return <BlankCenterDiv text={notSelected} />;
@@ -89,7 +83,6 @@ function mapStateToProps(state) {
       notSelected: 'Please Select a Picture or Upload a Image'
     };
   }
-  const { id } = selectedImage;
   return {
     dimensions,
     selectedImage,

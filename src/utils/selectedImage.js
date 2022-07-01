@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BlankCenterDiv from '../components/comment/blankCenterDiv';
-// import ImageHeader from '../components/comment/imageHeader';
 import ImagePreview from '../components/comment/imagePreview';
 import AllComments from '../components/comment/allComments';
 import actions from '../redux/actions';
@@ -27,13 +26,9 @@ class SelectedImage extends Component {
       selectedPoint,
       newPoint,
       showPoints,
-      showAllComments,
       setDimensions,
-      editImage,
-      deleteImage,
       setNewPoint,
-      setSelectedPoint,
-      toggleOptions
+      setSelectedPoint
     } = this.props;
     if (notSelected) {
       return <BlankCenterDiv text={notSelected} />;
@@ -61,30 +56,6 @@ class SelectedImage extends Component {
         }}
       >
         <div style={style.imageBody}>
-          {/* <ImageHeader
-            image={selectedImage}
-            editImage={editImage}
-            deleteImage={deleteImage}
-            setSelectedPoint={setSelectedPoint}
-          /> */}
-          {/* <div style={style.settingsWrapper}>
-            <button
-              className="simpleButton"
-              onClick={() => {
-                toggleOptions('showPoints', !showPoints);
-              }}
-            >
-              {showPoints ? 'Hide Points' : 'Show Points'}
-            </button>
-            <button
-              className="simpleButton"
-              onClick={() => {
-                toggleOptions('showAllComments', !showAllComments);
-              }}
-            >
-              {showAllComments ? 'Hide Comments' : 'Show Comments'}
-            </button>
-          </div> */}
           <div
             style={{
               height: dimensions.height,

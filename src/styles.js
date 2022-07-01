@@ -20,19 +20,8 @@ const style = {
   },
   SingleImage: {
     button: {
-      // width: '15vw',
-      // maxHeight: '15vh',
-      // display: 'flex',
-      // justifyContent: 'center',
-      // background: colors.transparent,
-      // margin: '10px',
       outline: 0,
       border: 0
-    },
-    image: {
-      // position: 'absolute',
-      // maxWidth: '15vw',
-      // maxHeight: '15vh'
     },
     name: {
       position: 'absolute',
@@ -46,7 +35,6 @@ const style = {
 
   SelectedImage: {
     main: {},
-    // imageBody: { width: '40vw', position: 'absolute' },
     imageBody: { width: '40vw'},
     commentDiv: { position: 'absolute' },
     imageWrapper: {

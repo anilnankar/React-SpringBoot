@@ -12,9 +12,7 @@ class ImageComments extends Component {
   render() {
     const {
       imageId,
-      dimensions,
       selectedPoint,
-      showAllComments,
       comments,
       setSelectedPoint
     } = this.props;
@@ -62,7 +60,7 @@ function mapStateToProps(state) {
     showAllComments
   } = state.reducers;
 
-  const { id } = selectedImage;
+  // const { id } = selectedImage;
   
   return {
     dimensions,

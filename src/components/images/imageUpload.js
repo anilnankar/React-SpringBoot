@@ -3,12 +3,9 @@ import { connect } from 'react-redux';
 import ImagePicker from '../../utils/imagePicker';
 import actions from '../../redux/actions';
 import './imageUpload.css';
-import styles from '../../styles';
 
 const { addImage, setSelectedPoint } = actions;
-const style = styles.Gallary;
-
-class Gallary extends Component {
+class ImageUpload extends Component {
   handleSubmit = event => {
     event.preventDefault();
   };
@@ -28,7 +25,6 @@ class Gallary extends Component {
   render() {
     return (
       <div
-        // style={style.main}
         onClick={() => {
           setSelectedPoint(null);
         }}
@@ -45,5 +41,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   addImage
-})(Gallary);
+})(ImageUpload);
 

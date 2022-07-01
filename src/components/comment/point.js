@@ -4,7 +4,6 @@ import { getPointData } from '../../utils/localStorage';
 import { colors } from '../../styles';
 
 const pointRadius = 5;
-
 export default class Point extends Component {
   render() {
     const {

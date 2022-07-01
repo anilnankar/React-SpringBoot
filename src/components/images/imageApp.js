@@ -5,9 +5,9 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import './imageApp.css';
 import ImageList from './imageList';
 import ImageUpload from './imageUpload';
+import './imageApp.css';
 
 export default class ImageApp extends Component {
   render() {
