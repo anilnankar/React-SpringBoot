@@ -1,0 +1,52 @@
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import SingleImage from "./singleImage";
+import actions from "../../redux/actions";
+import "./imageList.css";
+
+// Creates a constant from actions
+const { changSelectedeImage, setSelectedPoint } = actions;
+
+// ImageList component to display all images & respective comments
+class ImageList extends Component {
+  // Render image list
+  render() {
+    // Create constant from props
+    const { images, changSelectedeImage, setSelectedPoint } = this.props;
+
+    // Return single image
+    return (
+      <div
+        onClick={() => {
+          setSelectedPoint(null);
+        }}
+      >
+        <div className="imageList">
+          <ul>
+            {images.map((image) => (
+              <li key={image.id}>
+                <SingleImage
+                  key={image.id}
+                  image={image}
+                  changSelectedeImage={changSelectedeImage}
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    );
+  }
+}
+
+// This funtion will return images list from redux store
+function mapStateToProps(state) {
+  const images = state.reducers.images;
+  return { images };
+}
+
+// Connecting the component to the redux store & export ImageList component
+export default connect(mapStateToProps, {
+  changSelectedeImage,
+  setSelectedPoint,
+})(ImageList);
