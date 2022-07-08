@@ -1,6 +1,8 @@
+// Create constants
 const reminder = 1000.0;
 const percent = 100000;
 
+// Function to set data in local storage
 const setLocalData = (state) => {
   try {
     localStorage.setItem("reactImageState", JSON.stringify(state));
@@ -9,6 +11,7 @@ const setLocalData = (state) => {
   }
 };
 
+// Function to get data in local storage
 const getLocalData = () => {
   const localData = localStorage.getItem("reactImageState");
   const data = localData
@@ -30,6 +33,7 @@ const getLocalData = () => {
   };
 };
 
+// Function to set point dimensions
 const setPoint = (dimensions, currentPosition) => {
   try {
     const { position } = currentPosition;
@@ -41,6 +45,7 @@ const setPoint = (dimensions, currentPosition) => {
   } catch (e) {}
 };
 
+// Function to get point data
 const getPointData = ({ id, dimensions }) => {
   const point = parseInt(id, 10);
   const width = Math.round(((point / percent) * dimensions.width) / reminder);
@@ -48,6 +53,7 @@ const getPointData = ({ id, dimensions }) => {
   return { width, height };
 };
 
+// Function to get comment time differnce with current time
 const timeDifference = (givenTime) => {
   givenTime = new Date(givenTime);
   const milliseconds = new Date().getTime() - givenTime.getTime();
@@ -100,4 +106,6 @@ const timeDifference = (givenTime) => {
   };
   return getTime();
 };
+
+// Export the functions
 export { setLocalData, getLocalData, getPointData, setPoint, timeDifference };

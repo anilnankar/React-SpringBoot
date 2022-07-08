@@ -14,6 +14,25 @@ class ImageList extends Component {
     // Create constant from props
     const { images, changSelectedeImage, setSelectedPoint } = this.props;
 
+    let imagesList;
+    if (images && images.length > 0) {
+      imagesList = <ul>
+        {
+          images.map((image) => (
+            <li key={image.id}>
+              <SingleImage
+                key={image.id}
+                image={image}
+                changSelectedeImage={changSelectedeImage}
+              />
+            </li>
+          ))
+        }
+      </ul>;
+    } else {
+      imagesList = <div> Images are not uploaded </div>;
+    }
+
     // Return single image
     return (
       <div
@@ -22,17 +41,7 @@ class ImageList extends Component {
         }}
       >
         <div className="imageList">
-          <ul>
-            {images.map((image) => (
-              <li key={image.id}>
-                <SingleImage
-                  key={image.id}
-                  image={image}
-                  changSelectedeImage={changSelectedeImage}
-                />
-              </li>
-            ))}
-          </ul>
+          {imagesList }          
         </div>
       </div>
     );
