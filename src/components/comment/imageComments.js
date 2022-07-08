@@ -33,7 +33,7 @@ class ImageComments extends Component {
         }}
       >
         <div style={style.commentBody}>
-          <span style={style.commentUser}>{comment.user}</span>
+          <span style={style.commentUser}>Email: {comment.email}</span>
           <span style={style.commentTime}>{timeDifference(comment.time)}</span>
         </div>
         <span style={style.commentSpan}>{comment.comment}</span>

@@ -96,11 +96,11 @@ const timeDifference = (givenTime) => {
     }
     const hours = Math.floor((temp %= 86400) / 3600);
     if (hours) {
-      return `${hours} hour${numberEnding(hours)} ago`;
+      return `${hours} hr${numberEnding(hours)} ago`;
     }
     const minutes = Math.floor((temp %= 3600) / 60);
     if (minutes) {
-      return `${minutes} minute${numberEnding(minutes)} ago`;
+      return `${minutes} min${numberEnding(minutes)} ago`;
     }
     return "now";
   };

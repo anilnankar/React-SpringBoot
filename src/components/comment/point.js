@@ -33,18 +33,14 @@ class Point extends Component {
         }}
       >
         <div
-          style={{
-            width: pointRadius * 2,
-            height: pointRadius * 2,
-            backgroundColor,
-            borderRadius: '50%'
-          }}
           onClick={event => {
             event.stopPropagation();
             const newSelectedPoint = id === selectedPoint ? null : id;
             setSelectedPoint(newSelectedPoint);
           }}
-        />
+        >
+          <i class="fa fa-map-marker" style={{fontSize: '25px', color: '#ffa700'}}></i>
+        </div>
         <PointComments newPoint={newPoint} pointId={id} image={image}/>
       </div>
     );
