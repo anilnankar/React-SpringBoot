@@ -30,6 +30,7 @@ class ImagePoint extends Component {
       setDimensions,
       setNewPoint,
       setSelectedPoint,
+      changSelectedeImage
     } = this.props;
 
     // If image not selected then return empty div
@@ -49,6 +50,7 @@ class ImagePoint extends Component {
       setDimensions,
       setNewPoint,
       setSelectedPoint,
+      changSelectedeImage
     };
 
     return (

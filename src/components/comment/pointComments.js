@@ -4,7 +4,6 @@ import InputTextbox from "../ui/form/inputTextbox";
 import InputTextarea from "../ui/form/inputTextarea";
 import Button from "../ui/form/button";
 import actions from "../../redux/actions";
-import { timeDifference } from "../../utils/localStorage";
 import styles from "../../styles";
 
 // Creates a constant from actions and style
@@ -64,6 +63,7 @@ class PointComments extends Component {
       setComments,
     } = this.props;
 
+    // Get email and comment from state
     const {
       email,
       comment

@@ -12,9 +12,11 @@ const style = styles.ImagePreview;
 class ImagePreview extends Component {
 
   // Function of set new point
-  setComment = (event) => {
+  setComment = function (event, image) {
+    const { dimensions, setNewPoint, selectedImage, selectedPoint, changSelectedeImage } = this.props;
+    changSelectedeImage(image);
+    console.log(selectedImage, selectedPoint, image);
     event.stopPropagation();
-    const { dimensions, setNewPoint } = this.props;
     const newPoint = setPoint(dimensions, this.currentPosition);
     if (newPoint) {
       setNewPoint(newPoint);
@@ -44,7 +46,7 @@ class ImagePreview extends Component {
                   (this.currentPosition = currentPosition)
                 }
               >
-                <div onClick={this.setComment}>
+                <div onClick={(event) => this.setComment(event, image)}>
                   <div style={style.commentDiv}>
                     <img
                       style={style.mainImage}

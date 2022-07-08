@@ -6,13 +6,13 @@ import ImagePoint from "./imagePoint";
 class SingleImage extends Component {
   render() {
     // Creates a constant from props
-    const { image } = this.props;
+    const { image, changSelectedeImage } = this.props;
 
     // Return single image view
     return (
       <div>
         <div className="image">
-          <ImagePoint image={image} />
+          <ImagePoint image={image} changSelectedeImage={changSelectedeImage}/>
         </div>
         <div className="imageComments">
           <ImageComments imageId={image.id} />
