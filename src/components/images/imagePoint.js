@@ -1,20 +1,24 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import BlankCenterDiv from '../comment/blankCenterDiv';
-import ImagePreview from '../comment/imagePreview';
-import actions from '../../redux/actions';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import BlankCenterDiv from "../comment/blankCenterDiv";
+import ImagePreview from "../comment/imagePreview";
+import actions from "../../redux/actions";
 
+// Creates a constant from actions
 const {
   setDimensions,
   editImage,
   deleteImage,
   setNewPoint,
   setSelectedPoint,
-  toggleOptions
+  toggleOptions,
 } = actions;
 
+// ImagePoint component to create new image point 
 class ImagePoint extends Component {
   render() {
+
+    // Creates a constant from props
     const {
       image,
       dimensions,
@@ -25,11 +29,15 @@ class ImagePoint extends Component {
       showPoints,
       setDimensions,
       setNewPoint,
-      setSelectedPoint
+      setSelectedPoint,
     } = this.props;
+
+    // If image not selected then return empty div
     if (notSelected) {
       return <BlankCenterDiv text={notSelected} />;
     }
+
+    // Create constant for points of particular image
     const imgPoints = points[image.id];
     const imagePreViewProps = {
       dimensions,
@@ -40,28 +48,29 @@ class ImagePoint extends Component {
       showPoints,
       setDimensions,
       setNewPoint,
-      setSelectedPoint
+      setSelectedPoint,
     };
 
     return (
       <div
-        onClick={event => {
+        onClick={(event) => {
           event.stopPropagation();
           setSelectedPoint(null);
         }}
       >
-          <div
-            style={{
-              height: dimensions.height,
-            }}
-          >
-            <ImagePreview {...imagePreViewProps} />
-          </div>
+        <div
+          style={{
+            height: dimensions.height,
+          }}
+        >
+          <ImagePreview {...imagePreViewProps} />
+        </div>
       </div>
     );
   }
 }
 
+// This funtion will return comment data from redux store
 function mapStateToProps(state) {
   const {
     dimensions,
@@ -71,16 +80,16 @@ function mapStateToProps(state) {
     selectedPoint,
     newPoint,
     showPoints,
-    showAllComments
+    showAllComments,
   } = state.reducers;
   if (images.length === 0) {
     return {
-      notSelected: 'Please  upload a new Image'
+      notSelected: "Please  upload a new Image",
     };
   }
   if (!selectedImage) {
     return {
-      notSelected: 'Please Select a Picture or Upload a Image'
+      notSelected: "Please Select a Picture or Upload a Image",
     };
   }
   return {
@@ -90,14 +99,16 @@ function mapStateToProps(state) {
     selectedPoint,
     newPoint,
     showPoints,
-    showAllComments
+    showAllComments,
   };
 }
+
+// Connecting the component to the redux store & export ImagePoint component
 export default connect(mapStateToProps, {
   setDimensions,
   editImage,
   deleteImage,
   setNewPoint,
   setSelectedPoint,
-  toggleOptions
+  toggleOptions,
 })(ImagePoint);

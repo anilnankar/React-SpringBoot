@@ -1,3 +1,4 @@
+// Define default theme properties
 const colors = {
   primary: '#21C6E1',
   bgComment: 'rgba(0,0,0, .5)',
@@ -5,6 +6,8 @@ const colors = {
   transparent: 'rgba(0,0,0,0)',
   bgDark: '#e9e9e9'
 };
+
+// Define style
 const style = {
   Gallary: {
     main: {
@@ -159,5 +162,9 @@ const style = {
     commentSpan: { overflowX: 'scroll', wordBreak: 'break-all' }
   }
 };
+
+// Export style
 export default style;
+
+// Export colors
 export { colors };

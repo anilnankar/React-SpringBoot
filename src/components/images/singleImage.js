@@ -1,17 +1,26 @@
-import React, { Component } from 'react';
-import ImageComments from '../comment/imageComments';
-import ImagePoint from './imagePoint';
+import React, { Component } from "react";
+import ImageComments from "../comment/imageComments";
+import ImagePoint from "./imagePoint";
 
-export default class SingleImage extends Component {
+// SingleImage component to display immage points and comments
+class SingleImage extends Component {
   render() {
+    // Creates a constant from props
     const { image } = this.props;
-    return <div>
-        <div className='image'>
+
+    // Return single image view
+    return (
+      <div>
+        <div className="image">
           <ImagePoint image={image} />
         </div>
-        <div className='imageComments'>
+        <div className="imageComments">
           <ImageComments imageId={image.id} />
         </div>
-    </div>
+      </div>
+    );
   }
 }
+
+// Export SingleImage component
+export default SingleImage;

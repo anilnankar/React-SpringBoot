@@ -1,24 +1,24 @@
 const reminder = 1000.0;
 const percent = 100000;
 
-const setLocalData = state => {
+const setLocalData = (state) => {
   try {
-    localStorage.setItem('reactImageState', JSON.stringify(state));
+    localStorage.setItem("reactImageState", JSON.stringify(state));
   } catch (error) {
     return error;
   }
 };
 
 const getLocalData = () => {
-  const localData = localStorage.getItem('reactImageState');
+  const localData = localStorage.getItem("reactImageState");
   const data = localData
     ? JSON.parse(localData)
     : {
         images: [],
         points: {},
         comments: {},
-        selectedImage: '',
-        dimensions: {}
+        selectedImage: "",
+        dimensions: {},
       };
 
   return {
@@ -26,15 +26,15 @@ const getLocalData = () => {
     newPoint: null,
     selectedPoint: null,
     showAllComments: true,
-    showPoints: true
+    showPoints: true,
   };
 };
 
 const setPoint = (dimensions, currentPosition) => {
   try {
     const { position } = currentPosition;
-    const w = Math.round(reminder * position.x / dimensions.width);
-    const h = Math.round(reminder * position.y / dimensions.height);
+    const w = Math.round((reminder * position.x) / dimensions.width);
+    const h = Math.round((reminder * position.y) / dimensions.height);
     const width = reminder < w ? Math.round(reminder) : w;
     const height = reminder < h ? Math.round(reminder) : h;
     return `${width * percent + height}`;
@@ -43,18 +43,18 @@ const setPoint = (dimensions, currentPosition) => {
 
 const getPointData = ({ id, dimensions }) => {
   const point = parseInt(id, 10);
-  const width = Math.round(point / percent * dimensions.width / reminder);
-  const height = Math.round((point % percent) * dimensions.height / reminder);
+  const width = Math.round(((point / percent) * dimensions.width) / reminder);
+  const height = Math.round(((point % percent) * dimensions.height) / reminder);
   return { width, height };
 };
 
-const timeDifference = givenTime => {
+const timeDifference = (givenTime) => {
   givenTime = new Date(givenTime);
   const milliseconds = new Date().getTime() - givenTime.getTime();
-  const numberEnding = number => {
-    return number > 1 ? 's' : '';
+  const numberEnding = (number) => {
+    return number > 1 ? "s" : "";
   };
-  const number = num => (num > 9 ? '' + num : '0' + num);
+  const number = (num) => (num > 9 ? "" + num : "0" + num);
   const getTime = () => {
     let temp = Math.floor(milliseconds / 1000);
     const years = Math.floor(temp / 31536000);
@@ -67,21 +67,21 @@ const timeDifference = givenTime => {
     const days = Math.floor((temp %= 31536000) / 86400);
     if (days) {
       if (days < 28) {
-        return days + ' day' + numberEnding(days);
+        return days + " day" + numberEnding(days);
       } else {
         const months = [
-          'Jan',
-          'Feb',
-          'Mar',
-          'Apr',
-          'May',
-          'Jun',
-          'Jul',
-          'Aug',
-          'Sep',
-          'Oct',
-          'Nov',
-          'Dec'
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
         ];
         const month = months[givenTime.getUTCMonth()];
         const day = number(givenTime.getUTCDate());
@@ -96,7 +96,7 @@ const timeDifference = givenTime => {
     if (minutes) {
       return `${minutes} minute${numberEnding(minutes)} ago`;
     }
-    return 'now';
+    return "now";
   };
   return getTime();
 };

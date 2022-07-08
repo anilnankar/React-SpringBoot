@@ -1,22 +1,19 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-// import createHistory from 'history/createBrowserHistory';
-import { routerReducer, routerMiddleware } from 'react-router-redux';
-import thunk from 'redux-thunk';
-// import reducers from './reducers/image';
-import reducers from '../redux/reducers';
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
+import { routerReducer } from "react-router-redux";
+import thunk from "redux-thunk";
+import reducers from "../redux/reducers";
 
-// import { composeWithDevTools } from "redux-devtools-extension";
-
-// const history = createHistory();
-//const routeMiddleware = routerMiddleware(history);
+// Define middlewares
 const middlewares = [thunk];
 
+// Creacte redux store
 const store = createStore(
   combineReducers({
     reducers,
-    router: routerReducer
+    router: routerReducer,
   }),
   compose(applyMiddleware(...middlewares))
-  // composeWithDevTools(applyMiddleware(...middlewares))
 );
+
+// Export redux store
 export default store;

@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import BlankCenterDiv from '../components/comment/blankCenterDiv';
-import ImagePreview from '../components/comment/imagePreview';
-import AllComments from '../components/comment/allComments';
-import actions from '../redux/actions';
-import styles from '../styles';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import BlankCenterDiv from "../components/comment/blankCenterDiv";
+import ImagePreview from "../components/comment/imagePreview";
+import AllComments from "../components/comment/allComments";
+import actions from "../redux/actions";
+import styles from "../styles";
 
 const {
   setDimensions,
@@ -12,7 +12,7 @@ const {
   deleteImage,
   setNewPoint,
   setSelectedPoint,
-  toggleOptions
+  toggleOptions,
 } = actions;
 const style = styles.SelectedImage;
 
@@ -28,7 +28,7 @@ class SelectedImage extends Component {
       showPoints,
       setDimensions,
       setNewPoint,
-      setSelectedPoint
+      setSelectedPoint,
     } = this.props;
     if (notSelected) {
       return <BlankCenterDiv text={notSelected} />;
@@ -42,7 +42,7 @@ class SelectedImage extends Component {
       showPoints,
       setDimensions,
       setNewPoint,
-      setSelectedPoint
+      setSelectedPoint,
     };
     const paddingLeft = `${Math.round(
       (window.innerWidth - dimensions.width) / 2
@@ -50,7 +50,7 @@ class SelectedImage extends Component {
     return (
       <div
         style={style.main}
-        onClick={event => {
+        onClick={(event) => {
           event.stopPropagation();
           setSelectedPoint(null);
         }}
@@ -60,7 +60,7 @@ class SelectedImage extends Component {
             style={{
               height: dimensions.height,
               ...style.imageWrapper,
-              paddingLeft
+              paddingLeft,
             }}
           >
             <ImagePreview {...imagePreViewProps} />
@@ -81,16 +81,16 @@ function mapStateToProps(state) {
     selectedPoint,
     newPoint,
     showPoints,
-    showAllComments
+    showAllComments,
   } = state.reducers;
   if (images.length === 0) {
     return {
-      notSelected: 'Please  upload a new Image'
+      notSelected: "Please  upload a new Image",
     };
   }
   if (!selectedImage) {
     return {
-      notSelected: 'Please Select a Picture or Upload a Image'
+      notSelected: "Please Select a Picture or Upload a Image",
     };
   }
   const { id } = selectedImage;
@@ -101,7 +101,7 @@ function mapStateToProps(state) {
     selectedPoint,
     newPoint,
     showPoints,
-    showAllComments
+    showAllComments,
   };
 }
 export default connect(mapStateToProps, {
@@ -110,5 +110,5 @@ export default connect(mapStateToProps, {
   deleteImage,
   setNewPoint,
   setSelectedPoint,
-  toggleOptions
+  toggleOptions,
 })(SelectedImage);

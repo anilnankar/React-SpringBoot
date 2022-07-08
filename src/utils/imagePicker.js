@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 export default class ImagePicker extends Component {
-  handleImageChange = event => {
+  handleImageChange = (event) => {
     event.preventDefault();
     const { addImage } = this.props;
     const reader = new FileReader();
@@ -20,7 +20,7 @@ export default class ImagePicker extends Component {
         <input
           type="file"
           className="inputUpload"
-          onChange={e => this.handleImageChange(e)}
+          onChange={(e) => this.handleImageChange(e)}
         />
       </div>
     );

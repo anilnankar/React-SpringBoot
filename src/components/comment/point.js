@@ -3,9 +3,13 @@ import PointComments from './pointComments';
 import { getPointData } from '../../utils/localStorage';
 import { colors } from '../../styles';
 
+// Creates a constant
 const pointRadius = 5;
-export default class Point extends Component {
+
+// Point component to show comment box display
+class Point extends Component {
   render() {
+    // Create constant from props
     const {
       id,
       selectedPoint,
@@ -46,3 +50,6 @@ export default class Point extends Component {
     );
   }
 }
+
+// Export Point compoenent
+export default Point;

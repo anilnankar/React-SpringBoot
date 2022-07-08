@@ -1,14 +1,18 @@
-import React, { Component } from 'react';
-import ReactCursorPosition from 'react-cursor-position';
-import Measure from 'react-measure';
-import Point from './point';
-import { setPoint } from '../../utils/localStorage';
-import styles from '../../styles';
+import React, { Component } from "react";
+import ReactCursorPosition from "react-cursor-position";
+import Measure from "react-measure";
+import Point from "./point";
+import { setPoint } from "../../utils/localStorage";
+import styles from "../../styles";
 
+// Creates a constant from style
 const style = styles.ImagePreview;
 
-export default class ImagePreview extends Component {
-  setComment = event => {
+// ImagePreview component to measure and take cursor point
+class ImagePreview extends Component {
+
+  // Function of set new point
+  setComment = (event) => {
     event.stopPropagation();
     const { dimensions, setNewPoint } = this.props;
     const newPoint = setPoint(dimensions, this.currentPosition);
@@ -16,7 +20,9 @@ export default class ImagePreview extends Component {
       setNewPoint(newPoint);
     }
   };
+
   render() {
+    // Create constant from props
     const {
       dimensions,
       image,
@@ -25,17 +31,18 @@ export default class ImagePreview extends Component {
       showPoints,
       newPoint,
       setDimensions,
-      setSelectedPoint
+      setSelectedPoint,
     } = this.props;
 
     return (
       <div style={style.main}>
-        <Measure bounds onResize={measure => setDimensions(measure.bounds)}>
+        <Measure bounds onResize={(measure) => setDimensions(measure.bounds)}>
           {({ measureRef }) => (
             <div>
               <ReactCursorPosition
-                onPositionChanged={currentPosition =>
-                  (this.currentPosition = currentPosition)}
+                onPositionChanged={(currentPosition) =>
+                  (this.currentPosition = currentPosition)
+                }
               >
                 <div onClick={this.setComment}>
                   <div style={style.commentDiv}>
@@ -48,7 +55,7 @@ export default class ImagePreview extends Component {
                     />
                   </div>
                   <div style={style.commentDiv}>
-                    {imgPoints.map(point => (
+                    {imgPoints.map((point) => (
                       <Point
                         id={point}
                         key={point}
@@ -71,7 +78,7 @@ export default class ImagePreview extends Component {
                         image={image}
                       />
                     ) : (
-                      ''
+                      ""
                     )}
                   </div>
                 </div>
@@ -83,3 +90,6 @@ export default class ImagePreview extends Component {
     );
   }
 }
+
+// Export ImagePreview compoenent
+export default ImagePreview;

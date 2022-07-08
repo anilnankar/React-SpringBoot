@@ -1,16 +1,13 @@
-import React, {Component} from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link
-} from "react-router-dom";
-import ImageList from './imageList';
-import ImageUpload from './imageUpload';
-import './imageApp.css';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import ImageList from "./imageList";
+import ImageUpload from "./imageUpload";
+import "./imageApp.css";
 
-export default class ImageApp extends Component {
+// ImageApp component will display the routes
+class ImageApp extends Component {
   render() {
+    // Return the routes
     return (
       <div className="ImageApp">
         <Router>
@@ -27,11 +24,14 @@ export default class ImageApp extends Component {
           <div id="imageRoutes"></div>
           <hr />
           <Routes>
-            <Route exact path="/" element={<ImageUpload/>}/>
-            <Route exact path="/imageList" element={<ImageList/>}/>
+            <Route exact path="/" element={<ImageUpload />} />
+            <Route path="/imageList" element={<ImageList />} />
           </Routes>
         </Router>
       </div>
     );
   }
 }
+
+// Export ImageApp component
+export default ImageApp;
