@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-// Common Button component to create button dynamically
+// Button component to create button dynamically
 class Button extends Component {
   // Create a state from props
   state = {
@@ -31,6 +31,7 @@ class Button extends Component {
         style={this.props.style}
         onKeyPress={this.onKeyPress}
         value={this.state.value}
+        onClick={this.props.onClickCall}
       >
         {this.state.title}
       </button>

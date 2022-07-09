@@ -82,9 +82,9 @@ const style = {
     },
     header: { position: 'relative', width: '100%' },
     headerSpan: { fontSize: '1em', color: colors.primary },
-    input: { marginTop: '3px' },
-    inputtextarea: { marginTop: '3px', height: '50px' },
-    buttons: {  display: 'flex', justifyContent: 'space-between', padding: '4px 4px 0px 4px'},
+    inputTextarea: { marginTop: '0px', height: '50px', width: '87%', padding: '10px', resize: 'none' },
+    inputTextbox: { marginTop: '4px', height: '10px', width: '87%', padding: '10px' },
+    buttons: {  display: 'flex', justifyContent: 'space-between', padding: '8px 0px 0px 0px'},
     commentComponent: {
       textAlign: 'justify',
       fontSize: '.8em',
@@ -142,15 +142,18 @@ const style = {
       color: 'white',
       textAlign: 'justify',
       fontSize: '15px',
-      margin: '15px'
+      margin: '10px 15px 10px 15px',
+      borderBottom: '1px solid #ccc',
+      paddingBottom: '15px'
     },
     selecteCommentComponent: {
       color: 'black',
-      textAlign: 'left',
-      fontSize: '1.2em',
       background: 'white',
-      margin: '15px',
-      borderRadius: '3px'
+      textAlign: 'justify',
+      fontSize: '15px',
+      margin: '10px 15px 10px 15px',
+      borderBottom: '1px solid #ccc',
+      paddingBottom: '15px'
     },
     commentBody: { display: 'flex', marginTop: '2px' },
     commentUser: {
@@ -158,7 +161,7 @@ const style = {
       marginRight: '5px',
       fontStyle: 'italic'
     },
-    commentTime: { color: 'rgba(255,255,255,.60)' },
+    commentTime: { color: 'rgba(255,255,255,.60)', fontSize: '10px', margin: '3px 0px' },
     commentSpan: { overflowX: 'scroll', wordBreak: 'break-all' }
   }
 };
