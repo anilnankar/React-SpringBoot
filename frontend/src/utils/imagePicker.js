@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 
-export default class ImagePicker extends Component {
+// ImagePicker component to upload file
+class ImagePicker extends Component {
+
+  // Function call on select a file 
   handleImageChange = (event) => {
     event.preventDefault();
     const { addImage } = this.props;
@@ -26,3 +29,6 @@ export default class ImagePicker extends Component {
     );
   }
 }
+
+// Export ImagePicker component
+export default ImagePicker; 

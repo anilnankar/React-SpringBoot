@@ -9,6 +9,7 @@ class InputTextbox extends Component {
 
   // Function will call on key press
   onKeyPress = (event) => {
+    console.log(event);
     if (event.key === "Enter") {
       event.preventDefault();
       const { value } = this.state;
@@ -27,6 +28,7 @@ class InputTextbox extends Component {
   onChange = (event) => {
     event.preventDefault();
     const value = event.target.value;
+    this.props.onSearch(value);
     this.setState({ value });
     if (this.props.onChange) {
       this.props.onChange(value);

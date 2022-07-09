@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-// Common InputTextarea component to create textarea dynamically
+// Common button component to create textarea dynamically
 class InputTextarea extends Component {
   // Create a state from props
   state = {
@@ -27,6 +27,7 @@ class InputTextarea extends Component {
   onChange = (event) => {
     event.preventDefault();
     const value = event.target.value;
+    this.props.onSearch(value);
     this.setState({ value });
     if (this.props.onChange) {
       this.props.onChange(value);
