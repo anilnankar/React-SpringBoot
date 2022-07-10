@@ -11,8 +11,12 @@
     width: 1000px;
     margin: 0px;
     border-bottom: 2px solid #ccc;
-    height: 400px;
+    height: 275px;
     padding: 20px 10px 30px 10px;
+}
+
+.imageList ul :last-child{
+    border-bottom: none;
 }
 
 .imageList ul li .image {
@@ -20,7 +24,6 @@
     border-radius: 3px;
     text-align: left;
     float: left;
-    height: 370px;
 }
 
 .imageList ul li .image .img {
@@ -41,7 +44,7 @@
     background-color: #5e5e5e;
     padding: 5px 0px;
     margin-bottom: 15px;
-    height: 330px;
+    height: 265px;
     overflow-y: scroll;
     width: 300px;
 }

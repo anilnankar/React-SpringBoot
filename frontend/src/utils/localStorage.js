@@ -2,37 +2,6 @@
 const reminder = 1000.0;
 const percent = 100000;
 
-// Function to set data in local storage
-const setLocalData = (state) => {
-  try {
-    localStorage.setItem("reactImageState", JSON.stringify(state));
-  } catch (error) {
-    return error;
-  }
-};
-
-// Function to get data in local storage
-const getLocalData = () => {
-  const localData = localStorage.getItem("reactImageState");
-  const data = localData
-    ? JSON.parse(localData)
-    : {
-        images: [],
-        points: {},
-        comments: {},
-        selectedImage: "",
-        dimensions: {},
-      };
-
-  return {
-    ...data,
-    newPoint: null,
-    selectedPoint: null,
-    showAllComments: true,
-    showPoints: true,
-  };
-};
-
 // Function to set point dimensions
 const setPoint = (dimensions, currentPosition) => {
   try {
@@ -108,4 +77,4 @@ const timeDifference = (givenTime) => {
 };
 
 // Export the functions
-export { setLocalData, getLocalData, getPointData, setPoint, timeDifference };
+export { getPointData, setPoint, timeDifference };

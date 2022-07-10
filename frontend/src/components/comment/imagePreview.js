@@ -15,7 +15,6 @@ class ImagePreview extends Component {
   setComment = function (event, image) {
     const { dimensions, setNewPoint, selectedImage, selectedPoint, changSelectedeImage } = this.props;
     changSelectedeImage(image);
-    console.log(selectedImage, selectedPoint, image);
     event.stopPropagation();
     const newPoint = setPoint(dimensions, this.currentPosition);
     if (newPoint) {
@@ -35,6 +34,7 @@ class ImagePreview extends Component {
       setDimensions,
       setSelectedPoint,
     } = this.props;
+    console.log("imgPoints", imgPoints);
 
     return (
       <div style={style.main}>
@@ -52,12 +52,13 @@ class ImagePreview extends Component {
                       style={style.mainImage}
                       alt="#"
                       ref={measureRef}
-                      src={image.file}
+                      src={image.filepath}
                       className="img"
                     />
                   </div>
                   <div style={style.commentDiv}>
-                    {imgPoints.map((point) => (
+                    {
+                    imgPoints && imgPoints.map((point) => (
                       <Point
                         id={point}
                         key={point}
@@ -67,7 +68,8 @@ class ImagePreview extends Component {
                         setSelectedPoint={setSelectedPoint}
                         image={image}
                       />
-                    ))}
+                    ))
+                    }
                     {newPoint ? (
                       <Point
                         id={newPoint}

@@ -9,46 +9,46 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Service
 public class ImageHardcodedService {
 
-	private static List<Image> Images = new ArrayList<>();
+	private static List<Image> images = new ArrayList<>();
 	private static long idCounter = 0;
 
 	static {
-		Images.add(new Image(++idCounter, "a.jpg", "/tmp/a.jpg"));
-		Images.add(new Image(++idCounter, "b.jpg", "/tmp/b.jpg"));
+		images.add(new Image(++idCounter, "a.jpg", "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"));
+		images.add(new Image(++idCounter, "b.jpg", "https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80"));
 	}
 
 	public List<Image> findAll() {
-		return Images;
+		return images;
 	}
 
-	public Image save(Image Image) {
-		if (Image.getId() == -1 || Image.getId() == 0) {
-			Image.setId(++idCounter);
-			Images.add(Image);
+	public Image save(Image image) {
+		if (image.getId() == null || image.getId() == -1 || image.getId() == 0) {
+			image.setId(++idCounter);
+			images.add(image);
 		} else {
-			deleteById(Image.getId());
-			Images.add(Image);
+			deleteById(image.getId());
+			images.add(image);
 		}
-		return Image;
+		return image;
 	}
 
 	public Image deleteById(long id) {
-		Image Image = findById(id);
+		Image image = findById(id);
 
-		if (Image == null)
+		if (image == null)
 			return null;
 
-		if (Images.remove(Image)) {
-			return Image;
+		if (images.remove(image)) {
+			return image;
 		}
 
 		return null;
 	}
 
 	public Image findById(long id) {
-		for (Image Image : Images) {
-			if (Image.getId() == id) {
-				return Image;
+		for (Image image : images) {
+			if (image.getId() == id) {
+				return image;
 			}
 		}
 

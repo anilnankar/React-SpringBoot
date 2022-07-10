@@ -7,7 +7,7 @@ import actions from "../../redux/actions";
 import styles from "../../styles";
 
 // Creates a constant from actions and style
-const { setComments } = actions;
+const { setComments, deleteComment } = actions;
 const style = styles.PointComments;
 
 // Function to remove point
@@ -19,17 +19,6 @@ const removePoint = (points, pointId) => {
     }
   });
   return newPoints;
-};
-
-// Function to remove comment
-const removeComment = (comments, deletedComment) => {
-  const newComments = [];
-  comments.forEach((singleComment) => {
-    if (deletedComment.id !== singleComment.id) {
-      newComments.push(singleComment);
-    }
-  });
-  return newComments;
 };
 
 // ImageComments component to display comment a form
@@ -61,6 +50,7 @@ class PointComments extends Component {
       comments,
       thisPointComments,
       setComments,
+      deleteComment
     } = this.props;
 
     // Get email and comment from state
@@ -75,18 +65,8 @@ class PointComments extends Component {
     }
 
     const addComment = function() {
-      const newComment = {
-        comment: comment,
-        email: email,
-        id: new Date().getTime(),
-        time: new Date().getTime(),
-        user: "Comment",
-        pointId,
-      };
-
-      const newComments = [newComment, ...comments];
       const newPoints = newPoint ? [pointId, ...points] : points;
-      setComments(image, newPoints, newComments, pointId);
+      setComments(comment, email, image, newPoints, pointId, comments);
     }
 
     const cancelComment = function() {
@@ -106,14 +86,13 @@ class PointComments extends Component {
                 thisPointComments.length === 1
                   ? removePoint(points, pointId)
                   : points;
-              const newComments = removeComment(comments, comment);
-              setComments(image, newPoints, newComments, pointId);
+              deleteComment(comment, comments, image, newPoints, pointId);
             }}
           >
             X
           </span>
         </div>
-        <span style={style.commentSpan}>{comment.comment}</span>
+        <span style={style.commentSpan}>{comment.description}</span>
       </div>
     );
     return (
@@ -162,11 +141,14 @@ function mapStateToProps(state) {
   const { selectedImage, points, comments, selectedPoint } = state.reducers;
   const { id } = selectedImage;
   const thisPointComments = [];
-  comments[id].forEach((comment) => {
-    if (comment.pointId === selectedPoint) {
-      thisPointComments.push(comment);
-    }
-  });
+  if(comments[id] && comments[id].length > 0) {
+    comments[id].forEach((comment) => {
+      if (comment.pointId === selectedPoint) {
+        thisPointComments.push(comment);
+      }
+    });
+  }
+
   return {
     selectedImage,
     points: points[id],
@@ -177,4 +159,4 @@ function mapStateToProps(state) {
 }
 
 // Connecting the component to the redux store & export ImageList component
-export default connect(mapStateToProps, { setComments })(PointComments);
+export default connect(mapStateToProps, { setComments, deleteComment })(PointComments);

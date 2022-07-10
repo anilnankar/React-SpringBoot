@@ -11,7 +11,7 @@ class ImagePicker extends Component {
     const file = event.target.files[0];
     reader.onloadend = () => {
       if (reader.result) {
-        addImage(reader.result);
+        addImage(reader.result, file.name);
       }
     };
 

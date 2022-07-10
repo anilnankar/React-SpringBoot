@@ -146,7 +146,7 @@ const style = {
       borderBottom: '1px solid #ccc',
       paddingBottom: '15px'
     },
-    selecteCommentComponent: {
+    selectedCommentComponent: {
       color: 'black',
       background: 'white',
       textAlign: 'justify',

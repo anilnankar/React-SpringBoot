@@ -53,6 +53,7 @@ class ImagePoint extends Component {
       changSelectedeImage
     };
 
+    console.log("imagePreViewProps", imagePreViewProps);
     return (
       <div
         onClick={(event) => {

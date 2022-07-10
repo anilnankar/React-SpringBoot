@@ -11,25 +11,6 @@ const { addImage, setSelectedPoint } = actions;
 // ImageUpload component to upload new image
 class ImageUpload extends Component {
 
-  // Function to prevent defult submit event
-  handleSubmit = (event) => {
-    event.preventDefault();
-  };
-
-  // Funtion to upload image
-  handleImageChange = (event) => {
-    event.preventDefault();
-    const reader = new FileReader();
-    const file = event.target.files[0];
-    reader.onloadend = () => {
-      if (reader.result) {
-        this.props.addImage(reader.result);
-      }
-    };
-
-    reader.readAsDataURL(file);
-    // <Redirect to={'/imageList'} />
-  };
   render() {
     return (
       <div

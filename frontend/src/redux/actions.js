@@ -1,80 +1,281 @@
+import axios from "axios";
+import * as constant from "../utils/constants";
+
 // Create acttions of redux
 const actions = {
-  // Create action constants
-  ADD_IMAGE: "ADD_IMAGE",
-  CHANGE_SELECTED_IMAGE: "CHANGE_SELECTED_IMAGE",
-  EDIT_IMAGE: "EDIT_IMAGE",
-  DELETE_IMAGE: "DELETE_IMAGE",
-  TOGGLE_OPTIONS: "TOGGLE_OPTIONS",
-  SET_DIMENSION: "SET_DIMENSION",
-  SET_NEW_POINT: "SET_NEW_POINT",
-  SET_SELECTED_POINT: "SET_SELECTED_POINT",
-  SET_COMMENTS: "SET_COMMENTS",
+   // Get all image action
+   getAllImage: () => {
+    return async (dispatch) => {
+      try {
+        axios
+          .get(
+            `${constant.BASE_URL}/image`
+          )
+          .then((response) => {
+            if (response && response.status === 200) {
+              // Dispatch the objects
+              dispatch({
+                type: constant.GET_IMAGES,
+                images: response.data
+              });
+            }
+          })
+          .catch((e) => {
+            console.log("Fetch all images failed, ", e.message);
+          });
+      } catch (err) {
+        // send to custom analytics server
+        throw err;
+      }
+    }
+  },
 
   // Add image action to upload
-  addImage: (file) => {
+  addImage: (file, filename) => {
     return (dispatch) => {
-      dispatch({
-        type: actions.ADD_IMAGE,
-        newImage: {
-          id: new Date().getTime(),
-          file,
-        },
-      });
+      try {
+          // Construct request body
+          let requestBody = {
+            'filename': filename,
+            'filepath': "/tmp/"+filename
+          }
+
+          // Send post API call to server
+          axios
+          .post(`${constant.BASE_URL}/image`, requestBody)
+          .then((response) => {
+
+            // If http status is 201 the redirect to image list page
+            if (response && response.status === 201) {
+              console.log("Image uploaded successfully");
+              if(response.data && response.data.id) {
+                dispatch({
+                  type: constant.ADD_IMAGE,
+                  newImage: {
+                    id: response.data.id,
+                    file,
+                  },
+                });
+              }
+            }
+          })
+          .catch((e) => {
+            console.log("API failed to upload image", e.message);
+          });
+      } catch (err) {
+        console.log("Failed to upload image", err);
+        throw err;
+      }
     };
   },
 
   // Change selected image
   changSelectedeImage: (id) => ({
-    type: actions.CHANGE_SELECTED_IMAGE,
+    type: constant.CHANGE_SELECTED_IMAGE,
     id,
   }),
 
   // Edit image action
   editImage: (image) => ({
-    type: actions.EDIT_IMAGE,
+    type: constant.EDIT_IMAGE,
     image,
   }),
 
   // Delete image action
-  deleteImage: (image) => ({
-    type: actions.DELETE_IMAGE,
-    image,
-  }),
+  deleteImage: (image) => {
+    return (dispatch) => {
+      try {
+        axios
+          .delete(
+            `${constant.BASE_URL}/image/`+image.id
+          )
+          .then((response) => {
+            if (response && response.status === 200) {
+              // Dispatch the objects
+              dispatch({
+                type: constant.DELETE_IMAGE,
+                image,
+              });
+            }
+          })
+          .catch((e) => {
+            console.log("Image delete failed, ", e.message);
+          });
+      } catch (err) {
+        // send to custom analytics server
+        throw err;
+      }
+    }
+  },
 
   // Toggel image action
   toggleOptions: (key, value) => ({
-    type: actions.TOGGLE_OPTIONS,
+    type: constant.TOGGLE_OPTIONS,
     key,
     value,
   }),
 
   // Set dimention action
   setDimensions: (dimensions) => ({
-    type: actions.SET_DIMENSION,
+    type: constant.SET_DIMENSION,
     dimensions,
   }),
 
   // Set new point on image action
   setNewPoint: (newPoint) => ({
-    type: actions.SET_NEW_POINT,
+    type: constant.SET_NEW_POINT,
     newPoint,
   }),
 
   // Set selected point of image action
   setSelectedPoint: (selectedPoint) => ({
-    type: actions.SET_SELECTED_POINT,
+    type: constant.SET_SELECTED_POINT,
     selectedPoint,
   }),
 
-  // Set comment of selected image action
-  setComments: (selectedImage, points, comments, newPoint) => ({
-    type: actions.SET_COMMENTS,
-    selectedImage,
-    points,
-    comments,
-    newPoint,
-  }),
+  // Get all image action
+  getAllComments: () => {
+    return async (dispatch) => {
+      try {
+        axios
+          .get(
+            `${constant.BASE_URL}/comment`
+          )
+          .then((response) => {
+            if (response && response.status === 200) {
+
+              let imageComments = [];
+              let imagePoints = [];
+              response.data.forEach(function(item, index) {
+                console.log("item",item);
+                console.log("index",index);
+                if(!imageComments[response.data[index].imageId]) {
+                  imageComments[response.data[index].imageId] = [];
+                }
+                imageComments[response.data[index].imageId].push(item);
+
+                if(!imagePoints[response.data[index].imageId]) {
+                  imagePoints[response.data[index].imageId] = [];
+                }
+                imagePoints[response.data[index].imageId].push(item.pointId);
+              });
+              
+              console.log("imageComments",imageComments);
+              console.log("imagePoints",imagePoints);
+
+              // Dispatch the objects
+              dispatch({
+                type: constant.GET_COMMENTS,
+                comments: imageComments
+              });
+
+              // Dispatch the objects
+              dispatch({
+                type: constant.SET_POINTS,
+                points: imagePoints
+              });
+
+
+            }
+          })
+          .catch((e) => {
+            console.log("Fetch all comments failed, ", e.message);
+          });
+      } catch (err) {
+        // send to custom analytics server
+        throw err;
+      }
+    }
+  },
+
+  // Delete comment action
+  deleteComment: (deletedComment, comments, image, newPoints, pointId) => {
+    return (dispatch) => {
+      try {
+        console.log(deletedComment);
+        axios
+          .delete(
+            `${constant.BASE_URL}/comment/`+deletedComment.id
+          )
+          .then((response) => {
+            if (response && response.status === 200) {
+              const newComments = [];
+              comments.forEach((singleComment) => {
+                if (deletedComment.id !== singleComment.id) {
+                  newComments.push(singleComment);
+                }
+              });
+              
+              dispatch({
+                type: constant.SET_COMMENTS,
+                image,
+                newPoints,
+                newComments,
+                pointId
+              });
+            }
+          })
+          .catch((e) => {
+            console.log("Image delete failed, ", e.message);
+          });
+      } catch (err) {
+        // send to custom analytics server
+        throw err;
+      }
+    }
+  },
+
+  // Add a comment of selected image action
+  setComments: (comment, email, image, newPoints, pointId, allComments) => {
+    return (dispatch) => {
+      try {
+        const time =  new Date().getTime();
+        // Construct request body
+        let requestBody = {
+          'email': email,
+          'description': comment,
+          'imageId': image.id,
+          'pointId': pointId,
+          'time': time
+        }
+        console.log(requestBody);
+
+        // Send post API call to server
+        axios
+          .post(`${constant.BASE_URL}/comment`, requestBody)
+          .then((response) => {
+            // If http status is 201 the redirect to image list page
+            if (response && response.status === 201) {
+              if(response.data && response.data.id) {
+
+                const newComment = {
+                  id: response.data.id,
+                  comment: comment,
+                  email: email,
+                  time: time,
+                  pointId,
+                };
+                const newComments = [newComment, ...allComments];          
+
+                dispatch({
+                  type: constant.SET_COMMENTS,
+                  image,
+                  newPoints,
+                  newComments,
+                  pointId,
+                });
+              }
+            }
+          })
+          .catch((e) => {
+            console.log("API failed to add comment ", e.message);
+          });
+      } catch (err) {
+        console.log("Failed to upload image", err);
+        throw err;
+      }
+    };
+  }
 };
 
 // Export actions

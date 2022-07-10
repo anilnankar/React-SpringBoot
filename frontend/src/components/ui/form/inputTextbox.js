@@ -9,7 +9,6 @@ class InputTextbox extends Component {
 
   // Function will call on key press
   onKeyPress = (event) => {
-    console.log(event);
     if (event.key === "Enter") {
       event.preventDefault();
       const { value } = this.state;

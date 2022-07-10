@@ -24,7 +24,7 @@ class ImageComments extends Component {
         key={comment.id}
         style={
           comment.pointId === selectedPoint
-            ? style.selecteCommentComponent
+            ? style.selectedCommentComponent
             : style.commentComponent
         }
         onClick={(event) => {
@@ -36,16 +36,16 @@ class ImageComments extends Component {
           <span style={style.commentUser}>Email: {comment.email}</span>
           <span style={style.commentTime}>{timeDifference(comment.time)}</span>
         </div>
-        <span style={style.commentSpan}>{comment.comment}</span>
+        <span style={style.commentSpan}>{comment.description}</span>
       </div>
     );
 
     return (
       <div className="comments">
-        {imageComments.length === 0 ? (
-          <BlankCenterDiv text="No Comments" />
-        ) : (
+        {imageComments && imageComments.length > 0 ? (
           imageComments.map(commentComponent)
+        ) : (
+          <BlankCenterDiv text="No Comments" />
         )}
       </div>
     );
